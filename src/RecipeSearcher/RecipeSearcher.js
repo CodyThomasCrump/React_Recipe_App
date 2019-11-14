@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import RecipeList from '../ReciperList/RecipeList'
+import RecipeList from '../RecipeList/RecipeList';
+import Header from '../Header/Header';
 
 class RecipeSearcher extends Component {
 
@@ -10,14 +11,14 @@ class RecipeSearcher extends Component {
     }
 
     componentDidMount() {
-        this.getRecipeByName('Beef');
+        this.getRandomRecipe();
     }
 
     getRandomRecipe = () => {
 
         const _this = this
 
-        axios({
+        axios({ 
             /* We can configure everything we need to about the HTTP requestt in here */
             method: 'GET',
             url: 'https://www.themealdb.com/api/json/v1/1/random.php'
@@ -72,6 +73,8 @@ class RecipeSearcher extends Component {
     render() {
         return (
             <div>
+                <Header randomRecipeHandler={this.getRandomRecipe} />
+                <RecipeList recipes={this.state.recipes} />
             </div>
         )
     }
